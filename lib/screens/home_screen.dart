@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:learning/models/data_photo.dart';
 import 'package:learning/widgets/dawer.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: MyDrawer(),
       appBar: AppBar(
         actions: [],
-        title: Text('Home Screen title'),
+        title: Text('Home Screen title 1'),
       ),
       body: Center(
         child: myList.length > 0
@@ -59,21 +60,14 @@ class _HomeScreenState extends State<HomeScreen> {
     final responcse = await http
         .get(Uri.parse('http://jsonplaceholder.typicode.com/photos/$num'));
     final parsedResponse = jsonDecode(responcse.body);
-
+    final dataPHoto = DataPhoto(
+        albumId: parsedResponse['albumId'],
+        id: parsedResponse['id'],
+        title: parsedResponse['title'],
+        url: parsedResponse['url'],
+        thumbnailUrl: parsedResponse['thumbnailUrl']);
     setState(() {
-      myList.add(parsedResponse['url']);
+      myList.add(dataPHoto.url);
     });
-    print(myList.length);
-    print(5);
-
-    // print('start'); // hadi kifach tekhedeme future
-    // Future.delayed(Duration(seconds: 10), () {
-    //   print('it\'s me afeter 10 second');
-    //   print(1);
-    // });
   }
-
-  // jsonDecode(String body) {
-
-  // }
 }
