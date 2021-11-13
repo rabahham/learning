@@ -7,7 +7,9 @@ class DataPhotoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final myPhotos;
-    return new ListView.builder(
+    return new GridView.builder(
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
       itemCount: data_photos.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
